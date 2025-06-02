@@ -1,8 +1,10 @@
-const { argon2d, argon2id } = require('argon2')
+
 const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
 const argon2 = require('argon2')
 const validator = require('validator')
+
+// const UserModel = require('../models/mo')
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -29,7 +31,6 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        select: false,
         required: true,
         trim: true,
         minLength: 4,
@@ -70,17 +71,33 @@ const userSchema = new mongoose.Schema({
 userSchema.methods.generateToken = async function () {
     const user = this
 
+    // criando token
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '7d' })
 
-    if (user.tokens.length < 4) {
-        user.tokens?.push({ token })
-    } else {
+    // Gerenciando tokens, criando sessões
+    if (user.tokens.length > 4) {
         user.tokens?.shift()
-        await user.save()
     }
+
+    user.tokens?.push({ token })
+    await user.save()
 
     return token
 }
+
+
+userSchema.statics.findByCredentials = async function ({ email, password }) {
+    const user = this
+
+    const userData = await user.findOne({ email })
+    if (!userData) throw new Error('user not found')
+
+    const isPassword = await argon2.verify(userData.password, password)
+    if (!isPassword) throw new Error('Invalid password')
+
+    return userData
+}
+
 
 
 userSchema.pre('save', async function (next) {
@@ -103,6 +120,6 @@ userSchema.pre('save', async function (next) {
 })
 
 
-const useModel = mongoose.model('userModel', userSchema)
+const userModel = mongoose.model('userModel', userSchema)
 
-module.exports = useModel
+module.exports = userModel

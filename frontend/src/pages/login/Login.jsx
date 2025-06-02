@@ -4,6 +4,9 @@ import './Login.css';
 export default function SignIn() {
     const [form, setForm] = useState({ email: '', password: '' });
 
+    const [error, setError] = useState(null)
+    const [loading, setLoading] = useState(false)
+
     const handleChange = (e) => {
         setForm({
             ...form,
@@ -14,8 +17,10 @@ export default function SignIn() {
     async function handleForm(e) {
         e.preventDefault()
 
-        try {
+        setLoading(true)
+        setError('')
 
+        try {
             const res = await fetch('http://localhost:5000/users/login', {
                 method: 'POST',
                 headers: {
@@ -23,6 +28,8 @@ export default function SignIn() {
                 },
                 body: JSON.stringify(form)
             })
+
+            console.log(res)
 
             if (!res.ok) {
                 throw new Error('Erro ao obter dados do usuário')
@@ -34,6 +41,8 @@ export default function SignIn() {
 
         } catch (error) {
             console.log(error)
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -55,7 +64,8 @@ export default function SignIn() {
                     placeholder="Password"
                     required
                     onChange={(e) => handleChange(e)} />
-                <button type="submit">Login</button>
+                {!loading && <button type="submit" >Login</button>}
+                {loading && <button type="submit" disabled={loading} >Aguarde...</button>}
             </form>
         </div>
     );
