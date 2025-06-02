@@ -9,9 +9,9 @@ POST http://localhost:5000/users/signup
 Content-Type: application/json
 
 {
-    "name": "Igor",
+    "name": "Ig",
     "email": "igor@gmail.com",
-    "password": "123456"
+    "password": "12356"
 }
 
 ###

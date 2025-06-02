@@ -1,7 +1,5 @@
 const argon2 = require('argon2')
-
 const userModel = require('../models/userModel')
-
 const response = require('../utils/response')
 
 
@@ -16,8 +14,6 @@ exports.signup = async (req, res) => {
     try {
         // Obtendo dados corpo da requisição
         const { name, email, password } = req.body
-
-        console.log(req.ip)
 
         // Buscando usuário da base de dados por email
         const existUser = await userModel.findOne({ email })
@@ -37,5 +33,13 @@ exports.signup = async (req, res) => {
 
     } catch (error) {
         return res.status(404).json(response(false, 401, error.message))
+    }
+}
+
+exports.login = async (req, res) => {
+    try {
+
+    } catch (error) {
+
     }
 }
