@@ -2,7 +2,14 @@ const express = require('express')
 const route = express.Router()
 
 // Controllers da rota users
-const { getUser, signup, login, updateUserProfile, getUsers } = require('../controller/userController')
+const {
+    getUser,
+    signup,
+    login,
+    updateUserProfile,
+    getUsers,
+    logout
+} = require('../controller/userController')
 
 const validor = require('../middlewares/middle_Validator')
 const validateToken = require('../middlewares/validateToken')
@@ -15,10 +22,12 @@ route.post('/signup', signup)
 route.post('/login', login)
 
 // Obter usuários adicionados
-route.get('/', getUsers)
+route.get('/profile', validateToken, getUser)
 
-// Obter usuários adicionados
-route.get('/:id', getUser)
+// Rota de logout
+route.post('/logout', validateToken, logout)
+
+
 
 
 // route.patch('/profile/:id', updateUserProfile)

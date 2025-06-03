@@ -52,23 +52,6 @@ const userSchema = new mongoose.Schema({
 })
 
 
-// userSchema.methods.generateToken = async function () {
-//     const user = this
-
-//     const token = jwt.sign({ id: user.id }, process.env.JTW_SECRET, { expiresIn: '7d' })
-
-//     if (user.tokens.length > 4) {
-//         user?.tokens?.shift()
-//     }
-
-//     user.tokens?.push({ token })
-
-//     await user.save()
-
-//     return token
-// }
-
-
 userSchema.methods.generateToken = async function () {
     const user = this
 
@@ -76,7 +59,7 @@ userSchema.methods.generateToken = async function () {
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '7d' })
 
     // Gerenciando tokens, criando sessões
-    if (user.tokens.length > 4) {
+    if (user.tokens.length >= 3) {
         user.tokens?.shift()
     }
 

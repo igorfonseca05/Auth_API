@@ -15,13 +15,12 @@ const UserModel = require('../models/userModel')
  */
 
 async function validateToken(req, res, next) {
-
     try {
         const token = req.headers.authorization?.replace('Bearer', '').trim()
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
-        const user = await UserModel.findOne({ id: decoded.id, 'tokens.token': token })
-        if (!user) throw new Error('User not found')
+        const user = await UserModel.findOne({ _id: decoded.id, 'tokens.token': token })
+        if (!user) throw new Error('User not found, verify the token sent')
 
         req.token = token
         req.user = user

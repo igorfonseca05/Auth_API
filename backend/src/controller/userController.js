@@ -3,39 +3,6 @@ const UserModel = require('../models/userModel')
 const response = require('../utils/response')
 
 
-
-exports.getUsers = async (req, res) => {
-    try {
-
-        const users = await UserModel.find()
-
-        if (!users) {
-            throw new Error('Error to get users')
-        }
-
-        res.status(200).json(response(true, 200, 'Usuários obtidos com sucesso', [...users]))
-
-    } catch (error) {
-        res.status(404).json(response(true, 404, error.message))
-    }
-}
-
-
-exports.getUser = async (req, res) => {
-    try {
-
-        const id = req.params.id
-
-        const user = await UserModel.findById(id)
-        if (!user) throw new Error('User not found')
-
-        res.status(200).json(response(true, 200, 'Obtained user', user))
-    } catch (error) {
-        res.status(404).json(response(false, 404, error.message))
-    }
-}
-
-
 exports.signup = async (req, res) => {
     try {
         // Obtendo dados corpo da requisição
@@ -74,12 +41,27 @@ exports.login = async (req, res) => {
 }
 
 
-exports.logout = async () => {
+exports.logout = async (req, res) => {
     try {
+        const { id } = req.user
+        const token = req.token
 
+        const user = await UserModel.findById(id)
+        if (!user) {
+            res.status(404).json(response(true, 404, 'User not found'))
+        }
+
+
+        user.tokens = user.tokens.filter((t) => t.token !== token)
+        await user.save()
+        res.status(200).json(response(true, 200, 'Logout realizado com sucesso'))
     } catch (error) {
-
+        res.status(500).json(response(true, 500, error.message))
     }
 }
 
+// Controller para obter dados do usuário
+exports.getUser = async (req, res) => {
+    res.status(200).json(response(true, 200, 'Usuários obtidos com sucesso', req.user))
+}
 

@@ -1,7 +1,7 @@
 ###
-GET http://localhost:5000/users
+GET http://localhost:5000/users/profile
 Content-Type: application/json
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4M2YzNzJlZDMxYjNkNTkwN2ZjMGZkMiIsImlhdCI6MTc0ODk3NDA3MywiZXhwIjoxNzQ5NTc4ODczfQ.cn9THaw4O5VJNd4jnC2HbBeWt9cQ5V4caNrqRH8Qs4c
 ###
 
 ###
@@ -24,5 +24,10 @@ Content-Type: application/json
     "email": "eduardo@gmail.com",
     "password": "1235689"
 }
+###
 
+###
+POST http://localhost:5000/users/logout
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4M2YzNzJlZDMxYjNkNTkwN2ZjMGZkMiIsImlhdCI6MTc0ODk3NDA3MywiZXhwIjoxNzQ5NTc4ODczfQ.cn9THaw4O5VJNd4jnC2HbBeWt9cQ5V4caNrqRH8Qs4c
 ###
