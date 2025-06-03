@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect } from 'react'
 import './Home.css'
 
 import { useAuthContext } from '../../context/authContext'
@@ -6,7 +6,10 @@ import { useAuthContext } from '../../context/authContext'
 function Home() {
     const { userAuth } = useAuthContext()
 
-    console.log(userAuth)
+    useEffect(() => {
+        console.log(userAuth)
+
+    }, [userAuth])
 
     return (
         <div>

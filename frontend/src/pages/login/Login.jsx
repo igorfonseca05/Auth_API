@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import './Login.css';
 
-import { useAuth } from '../../../hooks/useAuth';
+import { useAuth } from '../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom'
 
 export default function SignIn() {
 
@@ -9,7 +10,9 @@ export default function SignIn() {
 
     const [form, setForm] = useState({ email: '', password: '' });
 
-    const handleChange = (e) => {
+    const navigate = useNavigate()
+
+    function handleChange(e) {
         setForm({
             ...form,
             [e.target.name]: e.target.value
@@ -18,9 +21,9 @@ export default function SignIn() {
 
     async function handleForm(e) {
         e.preventDefault()
-        login(form)
+        await login(form)
+        navigate('/')
     }
-
 
 
     return (

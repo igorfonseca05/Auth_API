@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 
-import { useAuthContext } from "../src/context/authContext";
+import { useAuthContext } from "../context/authContext";
 
 export function useAuth() {
     const { setUserAuth } = useAuthContext()
@@ -16,7 +16,7 @@ export function useAuth() {
     }
 
     async function login(user) {
-        checkIfIsMounted()
+        // checkIfIsMounted()
 
         setLoading(true)
         setError(null)
