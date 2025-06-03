@@ -68,6 +68,7 @@ const userSchema = new mongoose.Schema({
 //     return token
 // }
 
+
 userSchema.methods.generateToken = async function () {
     const user = this
 

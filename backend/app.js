@@ -4,6 +4,7 @@ const { dbEvents } = require('./db/connect')
 const routes = require('../backend/src/routes/routes')
 const cors = require('cors')
 const mongoose = require('mongoose')
+const cookieParser = require('cookie-parser')
 
 const app = express()
 
@@ -15,6 +16,8 @@ app.use(cors({
     allowedHeaders: ['Content-type', 'Authorization'],
     credentials: true
 }))
+app.use(cookieParser()) // Importante para ler cookies
+
 
 
 app.get('/', (req, res) => {
