@@ -3,29 +3,30 @@ const route = express.Router()
 
 // Controllers da rota users
 const {
-    getUser,
+    getMyProfile,
     signup,
     login,
-    updateUserProfile,
+    updateMyProfile,
     getUsers,
-    logout
+    logout,
+    logoutAll,
+    deleteMyAccount
 } = require('../controller/userController')
 
 const validor = require('../middlewares/middle_Validator')
 const validateToken = require('../middlewares/validateToken')
 
-
-// Criar usuário
+// Public
 route.post('/signup', signup)
-
-// autenticar usuário
 route.post('/login', login)
 
-// Obter usuários adicionados
-route.get('/profile', validateToken, getUser)
+// Private
+route.get('/me', validateToken, getMyProfile) // Obter usuários adicionados
+route.patch('/me', validateToken, updateMyProfile)
+route.delete('/me', validateToken, deleteMyAccount) // dele user Account
 
-// Rota de logout
-route.post('/logout', validateToken, logout)
+route.post('/logout', validateToken, logout) // Rota de logout
+route.post('/logoutAll', validateToken, logoutAll) // Rota de logout todas as contas
 
 
 

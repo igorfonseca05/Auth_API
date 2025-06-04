@@ -1,33 +1,57 @@
 ###
-GET http://localhost:5000/users/profile
+GET http://localhost:5000/api/users/me
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4M2YzNzJlZDMxYjNkNTkwN2ZjMGZkMiIsImlhdCI6MTc0ODk3NDA3MywiZXhwIjoxNzQ5NTc4ODczfQ.cn9THaw4O5VJNd4jnC2HbBeWt9cQ5V4caNrqRH8Qs4c
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDA0OTdjMTUyYzAzMDA2ZTI5M2VkZSIsImlhdCI6MTc0OTA0MzU4MCwiZXhwIjoxNzQ5NjQ4MzgwfQ.6XLlVzYdVvYFWEr91WPTuNUEeLxycdUlUutw8dkiWS0
 ###
 
 ###
-POST http://localhost:5000/users/signup
+POST http://localhost:5000/api/users/signup
 Content-Type: application/json
 
 {
     "name": "Eduardo",
     "email": "eduardo@gmail.com",
-    "password": "1235689"
+    "password": "123456"
 }
-
 ###
 
 ###
-POST http://localhost:5000/users/login
+PATCH  http://localhost:5000/api/users/me
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDA0OTdjMTUyYzAzMDA2ZTI5M2VkZSIsImlhdCI6MTc0OTA0MzU4MCwiZXhwIjoxNzQ5NjQ4MzgwfQ.6XLlVzYdVvYFWEr91WPTuNUEeLxycdUlUutw8dkiWS0
+
+{
+    "name": "Eduardo",
+    "email": "eduardoTenório@gmail.com",
+    "password": "123456"
+}
+###
+
+###
+POST http://localhost:5000/api/users/login
 Content-Type: application/json
 
 {
     "email": "eduardo@gmail.com",
-    "password": "1235689"
+    "password": "123456"
 }
 ###
 
+
 ###
-POST http://localhost:5000/users/logout
+POST http://localhost:5000/api/users/logout
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4M2YzNzJlZDMxYjNkNTkwN2ZjMGZkMiIsImlhdCI6MTc0ODk3NDA3MywiZXhwIjoxNzQ5NTc4ODczfQ.cn9THaw4O5VJNd4jnC2HbBeWt9cQ5V4caNrqRH8Qs4c
+###
+
+###
+POST http://localhost:5000/api/users/logoutAll
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4M2YzNzJlZDMxYjNkNTkwN2ZjMGZkMiIsImlhdCI6MTc0ODk3NDA5MSwiZXhwIjoxNzQ5NTc4ODkxfQ.uUHVMd4KWGuiGdppdEZ81KH4SzjVuhfDOoLmOg2Ytsk
+###
+
+###
+DELETE  http://localhost:5000/api/users/profile
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDA0OTQ1MTUyYzAzMDA2ZTI5M2VkNCIsImlhdCI6MTc0OTA0MzUyNSwiZXhwIjoxNzQ5NjQ4MzI1fQ.jVwJUC0ywRQLPOebHi_SZ1Zk0jNgapd_WsPZNMjdB3s
 ###
