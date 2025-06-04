@@ -46,16 +46,12 @@ exports.logout = async (req, res) => {
         const { id } = req.user
         const token = req.token
 
-        if (!token) return res.status(400).json(response(false, 400, 'Token ausente'));
-
         const user = await UserModel.findById(id)
-        if (!user) {
-            return res.status(404).json(response(true, 404, 'User not found'))
-        }
-
+        if (!user || !token) throw new Error('User not found or token has not sent')
 
         user.tokens = user.tokens.filter((t) => t.token !== token)
         await user.save()
+
         res.status(200).json(response(true, 200, 'Logout realizado com sucesso'))
     } catch (error) {
         res.status(500).json(response(true, 500, error.message))

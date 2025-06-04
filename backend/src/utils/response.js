@@ -8,7 +8,7 @@ function response(success = null, statusCode = null, message = null, user = []) 
         success,
         statusCode,
         message,
-        [field]: user,
+        ...([field] && { user }),
     }
 }
 
