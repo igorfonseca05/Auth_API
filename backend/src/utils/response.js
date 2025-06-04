@@ -2,13 +2,15 @@
 // Modelo de resposta padrão
 function response(success = null, statusCode = null, message = null, user = []) {
 
-    let field = user.length > 1 ? 'users' : 'user'
+    if (user?.toJSON) {
+        user = user.toJSON()
+    }
 
     return {
         success,
         statusCode,
         message,
-        ...([field] && { user }),
+        ...(user ?? { user }),
     }
 }
 

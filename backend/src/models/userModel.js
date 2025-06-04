@@ -51,7 +51,21 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 })
 
+// 4º step 
+// To clean up the userData before sending it back
+userSchema.methods.toJSON = function () {
+    const user = this
 
+    const publicUser = user.toObject();
+
+    delete publicUser.password;
+    delete publicUser.tokens;
+    delete publicUser.__v
+
+    return publicUser
+}
+
+// 2º step
 userSchema.methods.generateToken = async function () {
     const user = this
 
@@ -69,7 +83,7 @@ userSchema.methods.generateToken = async function () {
     return token
 }
 
-
+// 3º step 
 userSchema.statics.findByCredentials = async function ({ email, password }) {
     const user = this
 
@@ -84,6 +98,7 @@ userSchema.statics.findByCredentials = async function ({ email, password }) {
 
 
 
+// 1º step 
 userSchema.pre('save', async function (next) {
     const user = this
 

@@ -8,21 +8,18 @@ exports.signup = async (req, res) => {
         // Obtendo dados corpo da requisição
         const { name, email, password } = req.body
 
-        // Buscando usuário da base de dados por email
-        const existUser = await UserModel.findOne({ email })
-        if (existUser) {
-            throw new Error('Email já cadastrado')
-        }
+        const existUser = await UserModel.findOne({ email }) // Searching for the user based on their email
+        if (existUser) throw new Error('Email já cadastrado')
 
-        // Instanciando usuário   
-        const user = new UserModel({ name, email, password })
-        await user.generateToken()
+        const user = new UserModel({ name, email, password }) // Instanciando usuário   
+        await user.generateToken() // getting a token for the user instance
 
-        // Salvando usuário na base de dados 
-        await user.save()
+        await user.save()  // Salvando usuário na base de dados 
+
+        // const safeUser = user.toJSON() // Here i had to use explicitly toJSON to adjust the response
 
         // Respondendo requisição
-        return res.status(200).json(response(true, 200, 'Cadastro criado com sucesso', user._doc))
+        return res.status(200).json(response(true, 200, 'Cadastro criado com sucesso', user))
 
     } catch (error) {
         return res.status(404).json(response(false, 404, error.message))
@@ -42,22 +39,20 @@ exports.login = async (req, res) => {
 
 // Controller para obter dados do usuário
 exports.getMyProfile = async (req, res) => {
-
-    const user = await UserModel.findById(req.user.id).select('-password').select('-tokens')
-    res.status(200).json(response(true, 200, 'Usuários obtidos com sucesso', user))
-}
-
-exports.deleteMyAccount = async (req, res) => {
     try {
         const { id } = req.user
+        const user = await UserModel.findById(id)
 
-        const user = await UserModel.findByIdAndDelete(id)
+        if (!user) throw new Error('User not found')
 
-        res.status(200).json(response(true, 200, 'User account has been deleted successfully', user))
+        // const safeUser = user.toJSON()
+
+        res.status(200).json(response(true, 200, 'Usuários obtidos com sucesso', user))
     } catch (error) {
         res.status(500).json(response(false, 500, error.message))
     }
 }
+
 
 exports.updateMyProfile = async (req, res) => {
 
@@ -75,12 +70,24 @@ exports.updateMyProfile = async (req, res) => {
         userFields.forEach(field => user[field] = req.body[field])
         await user.save()
 
-        res.status(200).json(response(true, 200, 'User Profile updated successfully'))
+        res.status(200).json(response(true, 200, 'User Profile updated successfully', user))
     } catch (error) {
         res.status(500).json(response(false, 500, error.message))
     }
 }
 
+
+exports.deleteMyAccount = async (req, res) => {
+    try {
+        const { id } = req.user
+
+        const user = await UserModel.findByIdAndDelete(id)
+
+        res.status(200).json(response(true, 200, 'User account has been deleted successfully', user))
+    } catch (error) {
+        res.status(500).json(response(false, 500, error.message))
+    }
+}
 
 
 exports.logout = async (req, res) => {

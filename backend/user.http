@@ -1,7 +1,7 @@
 ###
 GET http://localhost:5000/api/users/me
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDA0OTdjMTUyYzAzMDA2ZTI5M2VkZSIsImlhdCI6MTc0OTA0MzU4MCwiZXhwIjoxNzQ5NjQ4MzgwfQ.6XLlVzYdVvYFWEr91WPTuNUEeLxycdUlUutw8dkiWS0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDBhMGU3YzQ3MjMzNGYyMGI5NjNhNCIsImlhdCI6MTc0OTA2NTk1OSwiZXhwIjoxNzQ5NjcwNzU5fQ.uFbSuevuLbAfJuUQq6ctBwBLPopl_om9k_cDtddwEc8
 ###
 
 ###
@@ -11,19 +11,19 @@ Content-Type: application/json
 {
     "name": "Eduardo",
     "email": "eduardo@gmail.com",
-    "password": "123456"
+    "password": "12345678"
 }
 ###
 
 ###
 PATCH  http://localhost:5000/api/users/me
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDA0OTdjMTUyYzAzMDA2ZTI5M2VkZSIsImlhdCI6MTc0OTA0MzU4MCwiZXhwIjoxNzQ5NjQ4MzgwfQ.6XLlVzYdVvYFWEr91WPTuNUEeLxycdUlUutw8dkiWS0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDBhMGU3YzQ3MjMzNGYyMGI5NjNhNCIsImlhdCI6MTc0OTA2NTk1OSwiZXhwIjoxNzQ5NjcwNzU5fQ.uFbSuevuLbAfJuUQq6ctBwBLPopl_om9k_cDtddwEc8
 
 {
     "name": "Eduardo",
-    "email": "eduardoTenório@gmail.com",
-    "password": "123456"
+    "email": "eduardoTenorio@gmail.com",
+    "password": "12345678"
 }
 ###
 
