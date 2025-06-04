@@ -70,7 +70,7 @@ exports.updateMyProfile = async (req, res) => {
         userFields.forEach(field => user[field] = req.body[field])
         await user.save()
 
-        res.status(200).json(response(true, 200, 'User Profile updated successfully', user))
+        res.status(200).json(response(true, 200, 'User Profile updated successfully'))
     } catch (error) {
         res.status(500).json(response(false, 500, error.message))
     }

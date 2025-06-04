@@ -1,6 +1,6 @@
 
 // Modelo de resposta padrão
-function response(success = null, statusCode = null, message = null, user = []) {
+function response(success = null, statusCode = null, message = null, user) {
 
     if (user?.toJSON) {
         user = user.toJSON()
@@ -10,7 +10,7 @@ function response(success = null, statusCode = null, message = null, user = []) 
         success,
         statusCode,
         message,
-        ...(user ?? { user }),
+        ...(user && { user }),
     }
 }
 

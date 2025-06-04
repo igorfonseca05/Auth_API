@@ -21,7 +21,7 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDBhMGU3YzQ3MjMzNGYyMGI5NjNhNCIsImlhdCI6MTc0OTA2NTk1OSwiZXhwIjoxNzQ5NjcwNzU5fQ.uFbSuevuLbAfJuUQq6ctBwBLPopl_om9k_cDtddwEc8
 
 {
-    "name": "Eduardo",
+    "name": "Eduar",
     "email": "eduardoTenorio@gmail.com",
     "password": "12345678"
 }
@@ -33,7 +33,7 @@ Content-Type: application/json
 
 {
     "email": "eduardo@gmail.com",
-    "password": "123456"
+    "password": "12345678"
 }
 ###
 
