@@ -45,8 +45,6 @@ exports.getMyProfile = async (req, res) => {
 
         if (!user) throw new Error('User not found')
 
-        // const safeUser = user.toJSON()
-
         res.status(200).json(response(true, 200, 'Usuários obtidos com sucesso', user))
     } catch (error) {
         res.status(500).json(response(false, 500, error.message))
@@ -75,7 +73,6 @@ exports.updateMyProfile = async (req, res) => {
         res.status(500).json(response(false, 500, error.message))
     }
 }
-
 
 exports.deleteMyAccount = async (req, res) => {
     try {
