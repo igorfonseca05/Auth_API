@@ -27,6 +27,7 @@ async function validateToken(req, res, next) {
 
         next()
     } catch (error) {
+        console.log(error)
         res.status(401).json(response(false, 401, error.message))
     }
 }

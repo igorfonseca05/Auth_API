@@ -2,23 +2,19 @@ const argon2 = require('argon2')
 const UserModel = require('../models/userModel')
 const response = require('../utils/response')
 
-
 exports.signup = async (req, res) => {
     try {
-        // Obtendo dados corpo da requisição
+
         const { name, email, password } = req.body
 
-        const existUser = await UserModel.findOne({ email }) // Searching for the user based on their email
+        const existUser = await UserModel.findOne({ email })
         if (existUser) throw new Error('Email já cadastrado')
 
-        const user = new UserModel({ name, email, password }) // Instanciando usuário   
-        await user.generateToken() // getting a token for the user instance
+        const user = new UserModel({ name, email, password })
+        await user.generateToken()
 
-        await user.save()  // Salvando usuário na base de dados 
+        await user.save()
 
-        // const safeUser = user.toJSON() // Here i had to use explicitly toJSON to adjust the response
-
-        // Respondendo requisição
         return res.status(200).json(response(true, 200, 'Cadastro criado com sucesso', user))
 
     } catch (error) {
